@@ -1,17 +1,24 @@
+//listening section
 
+//listening for click events
 var queryButton = document.querySelectorAll("button.drum");
-
 for (var i = 0; i < queryButton.length; i++) {
     queryButton[i].addEventListener("click", function () {
         makeSound(this.innerHTML);
+        buttonAnimation(this.innerHTML);
     });
 }
 
+//listening for keyboard events
 document.addEventListener("keydown", function (event) {
     makeSound(event.key);
+    buttonAnimation(event.key);
 });
 
 
+//actions section
+
+//to play the corresponding sound
 function makeSound(x) {
     switch (x) {
 
@@ -53,4 +60,13 @@ function makeSound(x) {
         default:
             console.log(x + " not assigned");
     }
+}
+
+//to highlight the box that was pressed or clicked
+function buttonAnimation(currentKey) {
+    var activeButton = document.querySelector("." + currentKey);
+    activeButton.classList.add("pressed");
+    setTimeout(() => {
+        activeButton.classList.remove("pressed");
+    },  100)
 }
